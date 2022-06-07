@@ -113,7 +113,7 @@ export class App {
                     dom: 'rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
                     columnDefs: [
                         {
-                            "targets": 0,
+                            "targets": [0, 5, 6, 7, 11],
                             "orderable": false,
                             "searchable": false
                         }
@@ -214,11 +214,8 @@ export class App {
                         }
                     },
                     {
-                        name: "Observation ID",
-                        title: "ObservationID",
-                        onRenderCell: (el, column, item: IItem) => {
-                            el.innerHTML = item.ObservationID ? item.ObservationID : "No Observation ID specified";
-                        }
+                        name: "ObservationID",
+                        title: "Observation ID"
                     },
                     {
                         name: "Status",
@@ -239,6 +236,12 @@ export class App {
                     {
                         name: "Recommendations",
                         title: "Recommendations"
+                    },
+                    {
+
+                        name: "SubmittedRecommendedOPR",
+                        title: "OPR"
+
                     },
                     {
                         name: "Modified By",

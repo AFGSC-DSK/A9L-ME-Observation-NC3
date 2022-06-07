@@ -12,7 +12,7 @@ export class deleteForms {
         Modal.setHeader("Delete Event");
 
         // Set the body
-        Modal.setBody("Are you sure you wanted to delete the selected event?");
+        Modal.setBody("Are you sure you wanted to delete this item?");
 
         // Set the type
         Modal.setType(Components.ModalTypes.Medium);
