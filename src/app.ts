@@ -139,26 +139,6 @@ export class App {
                 columns: [
                     {
                         name: "",
-                        title: "",
-                        onRenderCell: (el, column, item: IItem) => {
-                            if (this._isAdmin) {
-                                let deleteBtn = Components.Tooltip({
-                                    el: el,
-                                    content: "Delete Item",
-                                    btnProps: {
-                                        iconType: xSquareFill,
-                                        iconSize: 24,
-                                        type: Components.ButtonTypes.OutlineDanger,
-                                        onClick: () => {
-                                            deleteForms.delete(item, () => { this.refresh(); });
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    },
-                    {
-                        name: "",
                         title: "Title",
                         onRenderCell: (el, column, item: IItem) => {
                             // Displays clickable title
@@ -263,6 +243,22 @@ export class App {
                     {
                         name: "Comments",
                         title: "Current Status"
+                    },
+                    {
+                        name: "",
+                        title: "",
+                        onRenderCell: (el, column, item: IItem) => {
+                            if (this._isAdmin) {
+                                let deleteBtn = Components.Button({
+                                    el: el,
+                                    text: "Delete",
+                                    type: Components.ButtonTypes.OutlineDanger,
+                                    onClick: () => {
+                                        deleteForms.delete(item, () => { this.refresh(); });
+                                    }
+                                })
+                            }
+                        }
                     }
                 ]
             }
