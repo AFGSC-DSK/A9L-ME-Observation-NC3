@@ -28,6 +28,50 @@ export class App {
         this.render();
     }
 
+    private formViewEdit(item) {
+        // Show edit form if admin and view form if not
+        if (this._isAdmin) {
+            // Show the edit form
+            ItemForm.edit({
+                itemId: item.Id,
+                onUpdate: () => {
+                    // Refresh the data
+                    DataSource.load().then(items => {
+                        // Update the data
+                        this.refresh();
+                    });
+                },
+                onSetFooter: (elFooter) => {
+                    // Render the close button
+                    Components.Button({
+                        el: elFooter,
+                        text: "Cancel",
+                        type: Components.ButtonTypes.OutlineDanger,
+                        onClick: (button) => {
+                            ItemForm.close();
+                        }
+                    });
+                }
+            });
+        } else {
+            // Show the edit form
+            ItemForm.view({
+                itemId: item.Id,
+                onSetFooter: (elFooter) => {
+                    // Render the close button
+                    Components.Button({
+                        el: elFooter,
+                        text: "Close",
+                        type: Components.ButtonTypes.OutlineDanger,
+                        onClick: (button) => {
+                            ItemForm.close();
+                        }
+                    });
+                }
+            });
+        }
+    }
+
     // Refreshes the dashboard
     private refresh() {
         // Show a loading dialog
@@ -150,47 +194,7 @@ export class App {
                             elViewLink.className = "fw-bold text-primary";
                         },
                         onClickCell: (el, col, item: IItem) => {
-                            // Show edit form if admin and view form if not
-                            if (this._isAdmin) {
-                                // Show the edit form
-                                ItemForm.edit({
-                                    itemId: item.Id,
-                                    onUpdate: () => {
-                                        // Refresh the data
-                                        DataSource.load().then(items => {
-                                            // Update the data
-                                            dashboard.refresh(items);
-                                        });
-                                    },
-                                    onSetFooter: (elFooter) => {
-                                        // Render the close button
-                                        Components.Button({
-                                            el: elFooter,
-                                            text: "Cancel",
-                                            type: Components.ButtonTypes.OutlineDanger,
-                                            onClick: (button) => {
-                                                ItemForm.close();
-                                            }
-                                        });
-                                    }
-                                });
-                            } else {
-                                // Show the edit form
-                                ItemForm.view({
-                                    itemId: item.Id,
-                                    onSetFooter: (elFooter) => {
-                                        // Render the close button
-                                        Components.Button({
-                                            el: elFooter,
-                                            text: "Close",
-                                            type: Components.ButtonTypes.OutlineDanger,
-                                            onClick: (button) => {
-                                                ItemForm.close();
-                                            }
-                                        });
-                                    }
-                                });
-                            }
+                            this.formViewEdit(item);
                         }
                     },
                     {
