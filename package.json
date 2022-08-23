@@ -24,7 +24,7 @@
     "dattatable": "^1.7.3",
     "gd-sprest-bs": "^9.3.7",
     "jquery": "^3.6.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "sass": "^1.49.9"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "babel-loader": "^8.2.4",
     "css-loader": "^6.7.1",
     "html-loader": "^3.1.0",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.2.8",
