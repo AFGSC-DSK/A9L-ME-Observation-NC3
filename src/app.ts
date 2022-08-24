@@ -29,7 +29,7 @@ export class App {
     }
 
     private formViewEdit(item) {
-        // Show edit form if admin and view form if not
+        // Show the form as edit if admin
         if (this._isAdmin) {
             // Show the edit form
             ItemForm.edit({
@@ -54,7 +54,7 @@ export class App {
                 }
             });
         } else {
-            // Show the edit form
+            // Show the form as view-only
             ItemForm.view({
                 itemId: item.Id,
                 onSetFooter: (elFooter) => {

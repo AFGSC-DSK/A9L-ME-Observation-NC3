@@ -22,7 +22,7 @@ const Strings = {
     },
     ProjectName: "NC3 Hardening Ops Analysis Dashboard",
     ProjectDescription: "Created using the gd-sprest-bs library.",
-    ObservationReportConfig: ContextInfo.webServerRelativeUrl + "/SiteAssets/AFGSC Lessons Learned/obvrpt-config.json",
+    ObservationReportConfig: ContextInfo.webServerRelativeUrl + "/SiteAssets/A9L-ME-Observation-NC3/obvrpt-config.json",
     SolutionUrl: "/sites/dev/siteassets/sp-dashboard/index.html",
     SourceUrl: ContextInfo.webServerRelativeUrl,
     Version: "1.0"

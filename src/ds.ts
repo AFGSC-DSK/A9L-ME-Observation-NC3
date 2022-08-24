@@ -28,6 +28,8 @@ export interface IConfiguration {
     adminGroupName?: string;
     membersGroupName?: string;
     emailRecipients?: string;
+    dashboardTitle?: string;
+    configFolder?: string;
 }
 
 /**
@@ -83,15 +85,18 @@ export class DataSource {
         // Return a promise
         return new Promise((resolve, reject) => {
             // Load the data
-                this.loadStatusFilters().then(() => {
+            this.loadStatusFilters().then(() => {
                 // Load the config file settings
                 this.loadConfiguration().then(() => {
                     // Load the Admin/Memebers group
                     this.GetAdminStatus().then(() => {
-                        // Load the status filters
-                        this.load().then(() => {
-                            // Resolve the request
-                            resolve();
+                        // Load the set-title method
+                        this.SetTitle().then(() => {
+                            // Load the status filters
+                            this.load().then(() => {
+                                // Resolve the request
+                                resolve();
+                            }, reject);
                         }, reject);
                     }, reject);
                 }, reject);
@@ -111,7 +116,7 @@ export class DataSource {
                 Expand: ["ObservedBy", "Editor"],
                 OrderBy: ["Status"],
                 Select: ["*", "ObservedBy/Id", "ObservedBy/Title",
-                         "Editor/Id", "Editor/Title"
+                    "Editor/Id", "Editor/Title"
                 ],
                 Top: 5000
             }).execute(
@@ -149,6 +154,26 @@ export class DataSource {
                     () => { this._isAdmin = false; resolve(); }
                 )
             }
+        });
+    }
+
+    // Set Title
+    private static SetTitle(): PromiseLike<void> {
+        // Return a promise
+        return new Promise((resolve) => {
+            window.alert("Strings.Projectname: " + this._cfg.dashboardTitle);
+            // Temporary variable to hold the project's default name
+            let originalName: string = Strings.ProjectName;
+
+            // Set the project name
+            if (this._cfg.dashboardTitle) {
+                Strings.ProjectName = this._cfg.dashboardTitle;
+            } else {
+                Strings.ProjectName = originalName;
+            }
+
+            // Resolve the request
+            resolve();
         });
     }
 
